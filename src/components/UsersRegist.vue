@@ -66,9 +66,10 @@
       },
 
       checkUserName() {
-        axios.post(`http://localhost:8080/user/check_field?fieldName=username&fieldValue=${this.UserName}`)
+        axios.post(`http://localhost:8080/check_field?fieldName=username&fieldValue=${this.UserName}`)
         .then(Response => {
           if (Response.data.code === 0) {
+            this.error = false
             this.showSuccess(this.$refs.UserName)
           } else {
             this.error = true
@@ -77,6 +78,7 @@
         },
           Error => {
             this.error = true
+            console.log(Error)
             alert(Error.message)
         })
       },
@@ -119,16 +121,18 @@
             email: this.address
           }
           console.log(info)
-          axios.post('http://localhost:8080/user/register', info)
+          axios.post('http://localhost:8080/register', info)
                .then(Response => {
                 switch (Response.data.code) {
                   case 0:
                     alert('注册成功');
                     break;
                   case 1:
+                     console.log("register response 1")
                      this.showError(this.$refs.UserName, Response.data.message)
                 }
                }, Error => {
+                  console.log("register response null")
                   alert(Error.message)
                })
         }

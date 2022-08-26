@@ -4,6 +4,7 @@ module.exports = {
   configureWebpack: {
     devServer: {
       proxy: 'http://1.12.249.224:8099/user'
+      // proxy: 'http://localhost:8099/user'
     },
     module: {
       rules: [
